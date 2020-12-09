@@ -16,7 +16,7 @@ class Functionality():
                 self.func_list.append(self.pressHotkey)
             self.hotkeys = {1: ["Ctrl", "c"],
                             2: ["Ctrl", "v"],
-                            3: ["Ctrl", "c"],
+                            3: ["Ctrl", "a"],
                             4: ["Ctrl", "shift", "esc"],
                             5: "volumeup",
                             6: "volumedown",
@@ -43,7 +43,7 @@ class Functionality():
 
     def pressHotkey(self, num):
         hotkey = self.hotkeys[num]
-        if type(hotkey) == "list":
+        if type(hotkey) is list:
             pyautogui.hotkey(*hotkey)
         else:
             pyautogui.press(hotkey)
