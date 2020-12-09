@@ -1,3 +1,5 @@
 test.py
 /layouts
+/venv
 /.idea
+/__pycache__

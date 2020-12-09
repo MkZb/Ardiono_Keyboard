@@ -1,5 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QGridLayout, QWidget, QCheckBox, QSystemTrayIcon, \
-    QSpacerItem, QSizePolicy, QMenu, QAction, QStyle, qApp, QPushButton, QGroupBox
+from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtCore import QSize
 from PyQt5 import QtGui
 import sys, mainLayout
