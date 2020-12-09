@@ -1,7 +1,7 @@
 from Arduino import Arduino
 import time, sys
 from GUI import *
-from threading import Timer
+import threading
 
 
 def debounce(wait):
@@ -18,7 +18,7 @@ def debounce(wait):
                 debounced.t.cancel()
             except(AttributeError):
                 pass
-            debounced.t = Timer(wait, call_it)
+            debounced.t = threading.Timer(wait, call_it)
             debounced.t.start()
 
         return debounced
@@ -38,7 +38,11 @@ def test_func():
     print("YEP holding btn")
 
 def listen(pin: int):
-    pin_analog_value = board.analogRead(pin)
+    # pin_analog_value = board.analogRead(pin)
+    handle = open('test.txt', 'r')
+    pin_analog_value = int(handle.read())
+    handle.close()
+    print(pin_analog_value)
     """
     BTN LAYOUT:
     5  4  3  2  1
@@ -70,14 +74,20 @@ def listen(pin: int):
     #     print("No btn pressed")
 
 
+class ListenArduino (threading.Thread):
+   def __init__(self):
+       threading.Thread.__init__(self)
+   def run(self):
+       while (True):
+           # board = Arduino("115200")
+           listen(0)
+           time.sleep(3)  # change sleep for different frequency calls
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
-    # board = Arduino("115200")
-    #
-    # while (True):
-    #     listen(0)
-    #     time.sleep(0.5)  # change sleep for different frequency calls
+    thread1 = ListenArduino()
+    thread1.start()
     window.show()
     app.exec_()
 
