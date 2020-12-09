@@ -1,5 +1,6 @@
 from Arduino import Arduino
-import time
+import time, sys
+from GUI import *
 from threading import Timer
 
 
@@ -28,12 +29,12 @@ def debounce(wait):
 # debounce decorator makes our function to be executed after button release
 # that allows us to only execute function once even if button is being held
 @debounce(1)
-def test_func1():
-    print("YEP pressed")
+def keyPressed(num):
+    window.funct.func_list[num](num)
 
 #This function for example will be executed every time we listen to the new
 #analog value
-def test_func2():
+def test_func():
     print("YEP holding btn")
 
 def listen(pin: int):
@@ -45,33 +46,38 @@ def listen(pin: int):
     """
     #Btn1
     if pin_analog_value < 10:
-        test_func1()
+        keyPressed(1)
     #Btn2
     elif pin_analog_value < 516:
-        test_func2()
+        keyPressed(2)
     elif pin_analog_value < 686:
-        print("Btn3")
+        keyPressed(3)
     elif pin_analog_value < 771:
-        print("Btn4")
+        keyPressed(4)
     elif pin_analog_value < 823:
-        print("Btn5")
+        keyPressed(5)
     elif pin_analog_value < 881:
-        print("Btn6")
+        keyPressed(6)
     elif pin_analog_value < 856:
-        print("Btn7")
+        keyPressed(7)
     elif pin_analog_value < 899:
-        print("Btn8")
+        keyPressed(8)
     elif pin_analog_value < 913:
-        print("Btn9")
+        keyPressed(9)
     elif pin_analog_value < 924:
-        print("Btn10")
-    else:  # basically remove this section
-        print("No btn pressed")
+        keyPressed(10)
+    # else:  # basically remove this section
+    #     print("No btn pressed")
 
 
 if __name__ == '__main__':
-    board = Arduino("115200")
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    # board = Arduino("115200")
+    #
+    # while (True):
+    #     listen(0)
+    #     time.sleep(0.5)  # change sleep for different frequency calls
+    window.show()
+    app.exec_()
 
-    while (True):
-        listen(0)
-        time.sleep(0.5)  # change sleep for different frequency calls
