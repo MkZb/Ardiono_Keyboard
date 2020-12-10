@@ -30,7 +30,6 @@ def debounce(wait):
 # that allows us to only execute function once even if button is being held
 @debounce(0.3)
 def keyPressed(num):
-    print(num)
     window.funct.func_list[num - 1](num)
 
 
