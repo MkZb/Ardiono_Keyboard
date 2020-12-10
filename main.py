@@ -28,41 +28,41 @@ def debounce(wait):
 
 # debounce decorator makes our function to be executed after button release
 # that allows us to only execute function once even if button is being held
-@debounce(1)
+@debounce(0.3)
 def keyPressed(num):
-    window.funct.func_list[num](num)
+    print(num)
+    window.funct.func_list[num - 1](num)
 
-#This function for example will be executed every time we listen to the new
-#analog value
+
+# This function for example will be executed every time we listen to the new
+# analog value
 def test_func():
     print("YEP holding btn")
 
+
 def listen(pin: int):
-    # pin_analog_value = board.analogRead(pin)
-    handle = open('test.txt', 'r')
-    pin_analog_value = int(handle.read())
-    handle.close()
-    print(pin_analog_value)
+    pin_analog_value = board.analogRead(pin)
+    # handle = open('test.txt', 'r')
+    # pin_analog_value = int(handle.read())
+    # handle.close()
     """
     BTN LAYOUT:
     5  4  3  2  1
     6  7  8  9  10
     """
-    #Btn1
     if pin_analog_value < 10:
-        keyPressed(1)
-    #Btn2
+        keyPressed(5)
     elif pin_analog_value < 516:
-        keyPressed(2)
+        keyPressed(4)
     elif pin_analog_value < 686:
         keyPressed(3)
     elif pin_analog_value < 771:
-        keyPressed(4)
+        keyPressed(2)
     elif pin_analog_value < 823:
-        keyPressed(5)
-    elif pin_analog_value < 881:
-        keyPressed(6)
+        keyPressed(1)
     elif pin_analog_value < 856:
+        keyPressed(6)
+    elif pin_analog_value < 881:
         keyPressed(7)
     elif pin_analog_value < 899:
         keyPressed(8)
@@ -70,24 +70,23 @@ def listen(pin: int):
         keyPressed(9)
     elif pin_analog_value < 924:
         keyPressed(10)
-    # else:  # basically remove this section
-    #     print("No btn pressed")
 
 
-class ListenArduino (threading.Thread):
-   def __init__(self):
-       threading.Thread.__init__(self)
-   def run(self):
-       while (True):
-           # board = Arduino("115200")
-           listen(0)
-           time.sleep(3)  # change sleep for different frequency calls
+class ListenArduino(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        while (True):
+            listen(0)
+            time.sleep(0.2)  # change sleep for different frequency calls
+
 
 if __name__ == '__main__':
+    board = Arduino("115200")
     app = QApplication(sys.argv)
     window = MainWindow()
     thread1 = ListenArduino()
     thread1.start()
     window.show()
     app.exec_()
-

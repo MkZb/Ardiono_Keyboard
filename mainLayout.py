@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QAction, qApp, QMenu, QSystemTrayIcon
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -80,4 +81,5 @@ class Ui_MainWindow(object):
         self.profileButton_2.setText(_translate("MainWindow", "2"))
         self.profileButton_3.setText(_translate("MainWindow", "3"))
         self.profileButton_custom.setText(_translate("MainWindow", "Custom"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600; color:#00007f;\">Choose profile</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow",
+                                      "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600; color:#00007f;\">Choose profile</span></p></body></html>"))
