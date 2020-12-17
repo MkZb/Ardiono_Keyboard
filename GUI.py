@@ -19,8 +19,8 @@ class MainWindow(QMainWindow, mainLayout.Ui_MainWindow):
         self.profileButton_2.clicked.connect(self.chooseSecond)
         self.profileButton_3.clicked.connect(self.chooseThird)
         self.profileButton_custom.clicked.connect(self.chooseCustom)
-        self.funct = Functionality(3)
-        self.profileButton_3.setStyleSheet('QPushButton {background-color: red; color: black;}')
+        self.funct = Functionality(1)
+        self.profileButton_1.setStyleSheet('QPushButton {background-color: red; color: black;}')
 
     def chooseFirst(self):
         if self.funct.profile != 1:
